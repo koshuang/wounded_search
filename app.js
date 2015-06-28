@@ -5,10 +5,8 @@ angular.module('app')
     var vm = this;
 
     UserService.getUsers().then(function(response) {
-      console.log(response);
+      vm.users = response.data;
     });
-
-    vm.test = '1';
   })
   .factory('UserService', function($http) {
     return {
