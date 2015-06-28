@@ -22,8 +22,13 @@ angular.module('app')
       UserService.getUsers().then(function(response) {
         var data = response.data;
         var hospital;
+        var sources = data.source.split('http');
 
-        vm.sources = data.source.split(' ');
+        vm.source = {
+          name: sources[0].trim(),
+          url: 'http' + sources[1]
+        };
+
         vm.lastmodify = data.lastmodify;
         vm.users = _.map(data.data, function(user) {
           user['即時動向'] = user['即時動向'].trim();
