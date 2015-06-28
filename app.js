@@ -79,7 +79,7 @@ angular.module('app')
 
     function getUsers() {
       return $http.get(
-        'http://tonyq.org/kptaipei/api-20150628.php'
+        'https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw?t=1435501340'
       );
     }
   });
