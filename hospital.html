@@ -1,12 +1,31 @@
-<div class="modal-header">
-  <h3 class="modal-title">醫院資料 ({{hospital['醫院']}})</h3>
-</div>
-<div class="modal-body">
-  <ul>
-    <li>社福中心：{{hospital['社福中心']}}</li>
-    <li>辦公室電話：{{hospital['辦公室電話']}}</li>
-    <li>主任：{{hospital['主任']}}</li>
-    <li>主任手機：{{hospital['主任手機']}}</li>
-    <li>附註：{{hospital['附註']}}</li>
-  </ul>
-</div>
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>醫院資料 ({{hospital['醫院']}})</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="answer('not applicable')">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div>
+      <ul>
+        <li>社福中心：{{hospital['社福中心']}}</li>
+        <li>辦公室電話：{{hospital['辦公室電話']}}</li>
+        <li>主任：{{hospital['主任']}}</li>
+        <li>主任手機：{{hospital['主任手機']}}</li>
+        <li>附註：{{hospital['附註']}}</li>
+      </ul>
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="close()" class="md-primary">
+      關閉
+    </md-button>
+  </div>
+  </form>
+</md-dialog>

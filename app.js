@@ -1,7 +1,7 @@
-angular.module('app', ['ui.bootstrap']);
+angular.module('app', ['ngMaterial']);
 
 angular.module('app')
-  .controller('HomeController', function($modal, UserService) {
+  .controller('HomeController', function($mdDialog, UserService) {
     var vm = this;
     var fuse;
 
@@ -30,13 +30,6 @@ angular.module('app')
     }
 
     function search(name) {
-      var fSearch = _.partial(fussySearch, name);
-      var delaySearch = _.throttle(fSearch, 100);
-
-      delaySearch();
-    }
-
-    function fussySearch(name) {
       name = name || vm.searchText;
 
       if (!name) {
@@ -47,35 +40,23 @@ angular.module('app')
       vm.result = fuse.search(name);
     }
 
-    function showHospital(name) {
+    function showHospital(ev, name) {
       vm.hospital = _.find(hospitals, {
         '醫院': name
       });
 
-      var modalInstance = $modal.open({
-        animation: true,
-        controller: 'ModalInstanceCtrl',
-        templateUrl: 'hospital.html',
-        size: 'lg',
+      $mdDialog.show({
         resolve: {
           hospital: function() {
             return vm.hospital;
           }
-        }
+        },
+        controller: DialogController,
+        templateUrl: 'hospital.html',
+        parent: angular.element(document.body),
+        targetEvent: ev
       });
     }
-  })
-  .controller('ModalInstanceCtrl', function($scope, $modalInstance, hospital) {
-
-    $scope.hospital = hospital;
-
-    $scope.ok = function() {
-      $modalInstance.close($scope.selected.item);
-    };
-
-    $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
-    };
   })
   .factory('UserService', function($http) {
     return {
@@ -88,3 +69,11 @@ angular.module('app')
       );
     }
   });
+
+function DialogController($scope, $mdDialog, hospital) {
+  $scope.hospital = hospital;
+
+  $scope.close = function() {
+    $mdDialog.cancel();
+  };
+}
