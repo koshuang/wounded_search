@@ -18,6 +18,14 @@
       cursor: pointer;
     }
 
+    a {
+      color: blue;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
     .primary {
       background: #81C784;
     }
@@ -94,9 +102,11 @@
         <tr ng-repeat="user in vm.result">
           <td>
 
-            <md-button md-no-ink="" class="md-primary" ng-click="vm.showHospital($event, user['收治單位'])">
-              {{user['縣市別']}} {{user['收治單位']}} {{user.hospital_tel}}
-            </md-button>
+            {{user['縣市別']}}
+            <a ng-click="vm.showHospital($event, user['收治單位'])">
+              {{user['收治單位']}}
+            </a>
+            電話：{{user.hospital_tel}}
 
           </td>
           <td>
