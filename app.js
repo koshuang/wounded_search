@@ -1,7 +1,6 @@
 angular.module('app', ['ngMaterial']);
 
 angular.module('app')
-  .config(config)
   .controller('HomeController', function($mdDialog, UserService) {
     var vm = this;
     var fuse;
@@ -24,25 +23,14 @@ angular.module('app')
         var hospital;
         var sources = data.source.split('http');
 
+        vm.lastmodify = data.lastmodify;
+        vm.users = processUsers(data.data);
+        vm.result = vm.users;
+        vm.loaded = true;
         vm.source = {
           name: sources[0].trim(),
           url: 'http' + sources[1]
         };
-
-        vm.lastmodify = data.lastmodify;
-        vm.users = _.map(data.data, function(user) {
-          user['即時動向'] = user['即時動向'].trim();
-          user['救護檢傷'] = user['救護檢傷'].trim();
-          user.hospital_tel = (hospital = _.find(hospitals, function(
-            h) {
-            return h['醫院'] === user['收治單位'];
-          })) && hospital['辦公室電話'];
-
-          return user;
-        });
-        vm.result = vm.users;
-
-        vm.loaded = true;
 
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
@@ -52,15 +40,21 @@ angular.module('app')
       });
     }
 
-    function search(name) {
-      name = name || vm.searchText;
+    function processUsers(users) {
+      return _.map(users, function(user) {
+        user['即時動向'] = user['即時動向'].trim();
+        user['救護檢傷'] = user['救護檢傷'].trim();
+        user.hospital_tel = (hospital = _.find(hospitals, function(
+          h) {
+          return h['醫院'] === user['收治單位'];
+        })) && hospital['辦公室電話'];
 
-      if (!name) {
-        vm.result = vm.users;
-        return;
-      }
+        return user;
+      });
+    }
 
-      vm.result = fuse.search(name);
+    function search() {
+      vm.result = vm.searchText ? fuse.search(vm.searchText) : vm.users;
     }
 
     function showHospital(ev, name) {
@@ -92,8 +86,6 @@ angular.module('app')
       );
     }
   });
-
-function config($mdThemingProvider) {}
 
 function DialogController($scope, $mdDialog, hospital) {
   $scope.hospital = hospital;
