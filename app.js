@@ -20,10 +20,12 @@ angular.module('app')
 
     function fetchUsers() {
       UserService.getUsers().then(function(response) {
+        var data = response.data;
         var hospital;
 
-        vm.lastmodify = response.data.lastmodify;
-        vm.users = _.map(response.data.data, function(user) {
+        vm.sources = data.source.split(' ');
+        vm.lastmodify = data.lastmodify;
+        vm.users = _.map(data.data, function(user) {
           user.hospital_tel = (hospital = _.find(hospitals, function(
             h) {
             return h['醫院'] === user['收治單位'];
