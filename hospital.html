@@ -2,7 +2,7 @@
   <form>
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>醫院資料 ({{hospital['醫院']}})</h2>
+      <h2><i class="fa fa-hospital-o"></i> 醫院資料 ({{hospital['醫院']}})</h2>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="answer('not applicable')">
         <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -11,13 +11,21 @@
   </md-toolbar>
   <md-dialog-content>
     <div>
-      <ul>
-        <li>社福中心：{{hospital['社福中心']}}</li>
-        <li>辦公室電話：{{hospital['辦公室電話']}}</li>
-        <li>主任：{{hospital['主任']}}</li>
-        <li>主任手機：{{hospital['主任手機']}}</li>
-        <li>附註：{{hospital['附註']}}</li>
-      </ul>
+        <div layout="row">
+          <div flex="20" class="right">社福中心：</div><div>{{hospital['社福中心']}}</div>
+        </div>
+        <div layout="row">
+          <div flex="20" class="right"><i class="fa fa-phone"></i> 辦公室電話：</div><div>{{hospital['辦公室電話']}}</div>
+        </div>
+        <div layout="row">
+          <div flex="20" class="right">主任：</div><div>{{hospital['主任']}}</div>
+        </div>
+        <div layout="row">
+          <div flex="20" class="right"><i class="fa fa-mobile"></i> 主任手機：</div><div>{{hospital['主任手機']}}</div>
+        </div>
+        <div layout="row">
+          <div flex="20" class="right">附註：</div><div>{{hospital['附註']}}</div>
+        </div>
     </div>
   </md-dialog-content>
 
