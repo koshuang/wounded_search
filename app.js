@@ -10,6 +10,7 @@ angular.module('app')
     vm.showHospital = showHospital;
     vm.hospitals = hospitals;
     vm.hospital = {};
+    vm.loaded = false;
 
     activate();
 
@@ -31,6 +32,8 @@ angular.module('app')
           return user;
         });
         vm.result = vm.users;
+
+        vm.loaded = true;
 
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
