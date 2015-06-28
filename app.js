@@ -1,6 +1,7 @@
 angular.module('app', ['ngMaterial']);
 
 angular.module('app')
+  .config(config)
   .controller('HomeController', function($mdDialog, UserService) {
     var vm = this;
     var fuse;
@@ -69,6 +70,8 @@ angular.module('app')
       );
     }
   });
+
+function config($mdThemingProvider) {}
 
 function DialogController($scope, $mdDialog, hospital) {
   $scope.hospital = hospital;
