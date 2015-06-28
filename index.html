@@ -94,7 +94,7 @@
       </md-input-container>
 
       <md-data-table-container>
-        <table md-data-table>
+        <table md-data-table infinite-scroll='vm.loadMore()' infinite-scroll-distance='2'>
           <tr>
             <td width="20%">
               <b>收治單位</b>
@@ -162,6 +162,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
 
+  <script src="ng-infinite-scroll.js"></script>
   <script src="md-data-table.min.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>

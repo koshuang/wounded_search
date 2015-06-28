@@ -1,11 +1,17 @@
-angular.module('app', ['ngMaterial']);
+angular.module('app', ['ngMaterial', 'infinite-scroll']);
 
 angular.module('app')
   .controller('HomeController', function($mdDialog, UserService) {
     var vm = this;
+    var PAGE_COUNT = 20;
+    var paging = {
+      current: 1,
+      total: 1
+    };
     var fuse;
 
     vm.search = search;
+    vm.loadMore = loadMore;
     vm.showHospital = showHospital;
     vm.hospitals = hospitals;
     vm.hospital = {};
@@ -21,16 +27,16 @@ angular.module('app')
       UserService.getUsers().then(function(response) {
         var data = response.data;
         var hospital;
-        var sources = data.source.split('http');
 
+        vm.users = data.data;
+        vm.allResult = vm.users;
         vm.lastmodify = data.lastmodify;
-        vm.users = processUsers(data.data);
-        vm.result = vm.users;
+        vm.result = processPaging(vm.users);
+        vm.source = getSource(data);
+
+        processUsers(vm.users);
+
         vm.loaded = true;
-        vm.source = {
-          name: sources[0].trim(),
-          url: 'http' + sources[1]
-        };
 
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
@@ -41,20 +47,38 @@ angular.module('app')
     }
 
     function processUsers(users) {
-      return _.map(users, function(user) {
+      return _.each(users, function(user) {
         user['即時動向'] = user['即時動向'].trim();
         user['救護檢傷'] = user['救護檢傷'].trim();
         user.hospital_tel = (hospital = _.find(hospitals, function(
           h) {
           return h['醫院'] === user['收治單位'];
         })) && hospital['辦公室電話'];
-
-        return user;
       });
     }
 
+    function processPaging(users) {
+      paging.current = 1;
+      paging.total = Math.round(users.length / PAGE_COUNT);
+
+      return users.slice(0, PAGE_COUNT);
+    }
+
+    function loadMore() {
+      if (paging.current == paging.total) {
+        return;
+      }
+
+      var next = vm.users.slice(paging.current * PAGE_COUNT, ++paging.current *
+        PAGE_COUNT
+      );
+
+      vm.result = vm.result.concat(next);
+    }
+
     function search() {
-      vm.result = vm.searchText ? fuse.search(vm.searchText) : vm.users;
+      vm.allResult = vm.searchText ? fuse.search(vm.searchText) : vm.users;
+      vm.result = processPaging(vm.allResult);
     }
 
     function showHospital(ev, name) {
@@ -73,6 +97,15 @@ angular.module('app')
         parent: angular.element(document.body),
         targetEvent: ev
       });
+    }
+
+    function getSource(data) {
+      var sources = data.source.split('http');
+
+      return {
+        name: sources[0].trim(),
+        url: 'http' + sources[1]
+      };
     }
   })
   .factory('UserService', function($http) {
