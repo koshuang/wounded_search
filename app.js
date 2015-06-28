@@ -7,14 +7,7 @@ angular.module('app')
 
     vm.search = search;
     vm.showHospital = showHospital;
-    vm.hospital = {
-      '醫院': '臺大醫院',
-      '社福中心': '中正',
-      '辦公室電話': '02-23962340',
-      '主任': '林巧翊主任',
-      '主任手機': '972699132',
-      '附註': '於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話 02-27206528'
-    };
+    vm.hospital = {};
 
     activate();
 
@@ -47,7 +40,6 @@ angular.module('app')
     }
 
     function fussySearch(name) {
-      console.log('search', name);
       name = name || vm.searchText;
 
       if (!name) {
@@ -73,12 +65,6 @@ angular.module('app')
             return vm.hospital;
           }
         }
-      });
-
-      modalInstance.result.then(function(selectedItem) {
-
-      }, function() {
-
       });
     }
   })
