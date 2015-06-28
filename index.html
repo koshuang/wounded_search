@@ -28,7 +28,17 @@
         <div class="form-group">
           <input id="searchText" class="form-control" type="text" name="searchText" ng-model="vm.searchText" placeholder="搜尋條件, 例如： 長庚 或是 林文君" ng-change="vm.search()">
         </div>
-
+        <div class="form-group">
+          <div class="col-md-2">
+            人數：{{vm.result.length}}
+          </div>
+          <div class="col-md-2">
+            重傷：{{(vm.result | filter:{'救護檢傷': '重傷'}).length}}
+          </div>
+          <div class="col-md-2">
+            輕傷：{{(vm.result | filter:{'救護檢傷': '輕傷'}).length}}
+          </div>
+        </div>
         <table class="table">
           <tr>
             <th>
