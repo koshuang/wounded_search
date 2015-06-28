@@ -6,104 +6,112 @@
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 
-<form>
+<body ng-controller="HomeController as vm">
 
-  <div class="form-group">
-    <label for="searchText">搜尋條件</label>
-    <input id="searchText" type="text" name="searchText" ng-model="vm.searchText">
+
+  <div class="container">
+    <form class="panel panel-default">
+      <div class="panel-heading">
+        <h1>八仙爆炸事件傷者查詢</h1>
+      </div>
+
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="searchText">搜尋條件</label>
+          <input id="searchText" type="text" name="searchText" ng-model="vm.searchText">
+        </div>
+
+        <table class="table">
+          <tr>
+            <th>
+              編號
+            </th>
+            <th>
+              縣市別
+            </th>
+            <th>
+              收治單位
+            </th>
+            <th>
+              檢傷編號
+            </th>
+            <th>
+              姓名
+            </th>
+            <th>
+              性別
+            </th>
+            <th>
+              國籍
+            </th>
+            <th>
+              年齡
+            </th>
+            <th>
+              醫療檢傷
+            </th>
+            <th>
+              救護檢傷
+            </th>
+            <th>
+              即時動向
+            </th>
+            <th>
+              轉診要求
+            </th>
+            <th>
+              刪除註記
+            </th>
+          </tr>
+          <tr ng-repeat="user in vm.users | filter:vm.searchText">
+            <td>
+              {{user['編號']}}
+            </td>
+            <td>
+              {{user['縣市別']}}
+            </td>
+            <td>
+              {{user['收治單位']}}
+            </td>
+            <td>
+              {{user['檢傷編號']}}
+            </td>
+            <td>
+              {{user['姓名']}}
+            </td>
+            <td>
+              {{user['性別']}}
+            </td>
+            <td>
+              {{user['國籍']}}
+            </td>
+            <td>
+              {{user['年齡']}}
+            </td>
+            <td>
+              {{user['醫療檢傷']}}
+            </td>
+            <td>
+              {{user['救護檢傷']}}
+            </td>
+            <td>
+              {{user['即時動向']}}
+            </td>
+            <td>
+              {{user['轉診要求']}}
+            </td>
+            <td>
+              {{user['刪除註記']}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </form>
   </div>
 
-
-  <body ng-controller="HomeController as vm">
-    <table class="table">
-      <tr>
-        <th>
-          編號
-        </th>
-        <th>
-          縣市別
-        </th>
-        <th>
-          收治單位
-        </th>
-        <th>
-          檢傷編號
-        </th>
-        <th>
-          姓名
-        </th>
-        <th>
-          性別
-        </th>
-        <th>
-          國籍
-        </th>
-        <th>
-          年齡
-        </th>
-        <th>
-          醫療檢傷
-        </th>
-        <th>
-          救護檢傷
-        </th>
-        <th>
-          即時動向
-        </th>
-        <th>
-          轉診要求
-        </th>
-        <th>
-          刪除註記
-        </th>
-      </tr>
-      <tr ng-repeat="user in vm.users | filter:vm.searchText">
-        <td>
-          {{user['編號']}}
-        </td>
-        <td>
-          {{user['縣市別']}}
-        </td>
-        <td>
-          {{user['收治單位']}}
-        </td>
-        <td>
-          {{user['檢傷編號']}}
-        </td>
-        <td>
-          {{user['姓名']}}
-        </td>
-        <td>
-          {{user['性別']}}
-        </td>
-        <td>
-          {{user['國籍']}}
-        </td>
-        <td>
-          {{user['年齡']}}
-        </td>
-        <td>
-          {{user['醫療檢傷']}}
-        </td>
-        <td>
-          {{user['救護檢傷']}}
-        </td>
-        <td>
-          {{user['即時動向']}}
-        </td>
-        <td>
-          {{user['轉診要求']}}
-        </td>
-        <td>
-          {{user['刪除註記']}}
-        </td>
-      </tr>
-    </table>
-</form>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-resource.min.js"></script>
-<script src="app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-resource.min.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
