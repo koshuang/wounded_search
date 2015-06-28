@@ -42,31 +42,24 @@
 
 <body ng-controller="HomeController as vm">
   <md-toolbar layout="row">
-    <h1>八仙爆炸事件傷者查詢</h1>
+    <h2>八仙爆炸事件傷者查詢</h2>
   </md-toolbar>
 
   <md-content layout="row">
     <md-card flex class="info">
       <md-card-content>
-        <h2 class="md-title">狀況報告 (<small>最後更新時間：{{vm.lastmodify}}</small>)</h2>
+        <h2 class="md-title">狀況報告</h2>
         <div layout="row">
-          <div flex>
-            受傷人數：{{vm.users.length}}
-          </div>
-          <div flex>
-            重傷：{{(vm.users | filter:{'救護檢傷': '重傷'}).length}} 人
-          </div>
-          <div flex>
-            中傷：{{(vm.users | filter:{'救護檢傷': '中傷'}).length}} 人
-          </div>
-          <div flex>
-            輕傷：{{(vm.users | filter:{'救護檢傷': '輕傷'}).length}} 人
-          </div>
+          最後更新時間：{{vm.lastmodify}}
         </div>
         <div layout="row">
-          <div flex>
-            出院人數：{{(vm.users | filter:{'即時動向': '出院'}).length}} 人
-          </div>
+          受傷人數：{{vm.users.length}}
+        </div>
+        <div layout="row">
+          重傷：{{(vm.users | filter:{'救護檢傷': '重傷'}).length}} 人
+        </div>
+        <div layout="row">
+          出院人數：{{(vm.users | filter:{'即時動向': '出院'}).length}} 人
         </div>
       </md-card-content>
     </md-card>
