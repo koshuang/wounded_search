@@ -17,7 +17,8 @@
 
       <div class="panel-body">
         <div class="form-group">
-          <input id="searchText" class="form-control" type="text" name="searchText" ng-model="vm.searchText" placeholder="搜尋條件">
+          <input id="searchText" class="form-control" type="text" name="searchText"
+            ng-model="vm.searchText" placeholder="搜尋條件" ng-change="vm.search()">
         </div>
 
         <table class="table">
@@ -62,7 +63,7 @@
               刪除註記
             </th>
           </tr>
-          <tr ng-repeat="user in vm.users | filter:vm.searchText">
+          <tr ng-repeat="user in vm.result">
             <td>
               {{user['編號']}}
             </td>
@@ -110,6 +111,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/1.2.2/fuse.min.js"></script>
   <script src="app.js"></script>
 </body>
 
