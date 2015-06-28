@@ -15,8 +15,9 @@ angular.module('app')
 
     function fetchUsers() {
       UserService.getUsers().then(function(response) {
-        vm.users = response.data;
-        vm.result = response.data;
+        vm.lastmodify = response.data.lastmodify;
+        vm.users = response.data.data;
+        vm.result = response.data.data;
 
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
@@ -27,6 +28,14 @@ angular.module('app')
     }
 
     function search(name) {
+      var fSearch = _.partial(fussySearch, name);
+      var delaySearch = _.throttle(fSearch, 100);
+
+      delaySearch();
+    }
+
+    function fussySearch(name) {
+      console.log('search', name);
       name = name || vm.searchText;
 
       if (!name) {
@@ -36,12 +45,6 @@ angular.module('app')
 
       vm.result = fuse.search(name);
     }
-
-  })
-  .filter('userFilter', function() {
-    return function(input) {
-      return input ? '\u2713' : '\u2718';
-    };
   })
   .factory('UserService', function($http) {
     return {
@@ -50,7 +53,7 @@ angular.module('app')
 
     function getUsers() {
       return $http.get(
-        'https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw/2c1252bbbdf2f43d10f37d5591717b42787d8a99/gistfile1.json'
+        'https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw'
       );
     }
   });
