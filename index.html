@@ -4,6 +4,13 @@
   <title>八仙爆炸事件傷者查詢</title>
   <meta charset="utf-8"></meta>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <style>
+    [ng-click],
+    [data-ng-click],
+    [x-ng-click] {
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body ng-controller="HomeController as vm">
@@ -12,13 +19,14 @@
   <div class="container">
     <form class="panel panel-default">
       <div class="panel-heading">
-        <h1>八仙爆炸事件傷者查詢 <small>最後更新時間：{{vm.lastmodify}}</small></h1>
+        <h1>八仙爆炸事件傷者查詢
+          <small>最後更新時間：{{vm.lastmodify}}</small>
+        </h1>
       </div>
 
       <div class="panel-body">
         <div class="form-group">
-          <input id="searchText" class="form-control" type="text" name="searchText"
-            ng-model="vm.searchText" placeholder="搜尋條件, 例如： 長庚 或是 林文君" ng-change="vm.search()">
+          <input id="searchText" class="form-control" type="text" name="searchText" ng-model="vm.searchText" placeholder="搜尋條件, 例如： 長庚 或是 林文君" ng-change="vm.search()">
         </div>
 
         <table class="table">
@@ -71,7 +79,7 @@
               {{user['縣市別']}}
             </td>
             <td>
-              {{user['收治單位']}}
+              <a ng-click="vm.showHospital(user['收治單位'])">{{user['收治單位']}}</a>
             </td>
             <td>
               {{user['檢傷編號']}}
@@ -110,9 +118,10 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/1.2.2/fuse.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
+  <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
 
