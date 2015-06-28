@@ -113,12 +113,12 @@
             </td>
           </tr>
           <tr ng-repeat="user in vm.result">
-            <td width="20%">
+            <td width="20%" ng-click="vm.showHospital($event, user['收治單位'])">
               <div layout="column">
                 {{user['縣市別']}}
               </div>
               <div layout="column">
-                <a ng-if="user.hospital_tel" ng-click="vm.showHospital($event, user['收治單位'])">
+                <a ng-if="user.hospital_tel">
                   {{user['收治單位']}}
                 </a>
                 <span ng-if="!user.hospital_tel" >{{user['收治單位']}}</span>
