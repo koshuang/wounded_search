@@ -130,7 +130,7 @@
             <td>
               <div layout="row">
                 <span ng-class="{warn: user['即時動向'] == '加護病房',  info: user['即時動向'] == '轉院'}" ng-if="user['即時動向'] != '其它'">{{user['即時動向']}}</span>
-                <span ng-if="user['救護檢傷']" ng-class="{warn: user['救護檢傷'] == '重傷 '}">{{user['救護檢傷']}}</span>
+                <span ng-if="user['救護檢傷']" ng-class="{warn: user['救護檢傷'] == '重傷'}">({{user['救護檢傷']}})</span>
               </div>
               <div layout="column" ng-if="user['編號']">
                 編號：{{user['編號']}}

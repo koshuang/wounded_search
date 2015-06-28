@@ -26,6 +26,8 @@ angular.module('app')
         vm.sources = data.source.split(' ');
         vm.lastmodify = data.lastmodify;
         vm.users = _.map(data.data, function(user) {
+          user['即時動向'] = user['即時動向'].trim();
+          user['救護檢傷'] = user['救護檢傷'].trim();
           user.hospital_tel = (hospital = _.find(hospitals, function(
             h) {
             return h['醫院'] === user['收治單位'];
