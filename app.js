@@ -8,6 +8,7 @@ angular.module('app')
 
     vm.search = search;
     vm.showHospital = showHospital;
+    vm.hospitals = hospitals;
     vm.hospital = {};
 
     activate();
@@ -18,9 +19,18 @@ angular.module('app')
 
     function fetchUsers() {
       UserService.getUsers().then(function(response) {
+        var hospital;
+
         vm.lastmodify = response.data.lastmodify;
-        vm.users = response.data.data;
-        vm.result = response.data.data;
+        vm.users = _.map(response.data.data, function(user) {
+          user.hospital_tel = (hospital = _.find(hospitals, function(
+            h) {
+            return h['醫院'] === user['收治單位'];
+          })) && hospital['辦公室電話'];
+
+          return user;
+        });
+        vm.result = vm.users;
 
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',

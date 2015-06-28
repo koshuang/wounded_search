@@ -93,11 +93,11 @@
         </tr>
         <tr ng-repeat="user in vm.result">
           <td>
-            {{user['編號']}}
-            {{user['縣市別']}}
+
             <md-button md-no-ink="" class="md-primary" ng-click="vm.showHospital($event, user['收治單位'])">
-              <i class="fa fa-hospital-o"></i> {{user['收治單位']}}
-            </md-button><br>
+              {{user['縣市別']}} {{user['收治單位']}} {{user.hospital_tel}}
+            </md-button>
+
           </td>
           <td>
             <span class="md-title">{{user['姓名']}}</span>
@@ -110,6 +110,7 @@
               ng-if="user['即時動向'] != '其它'">{{user['即時動向']}}</span>
             {{user['醫療檢傷']}}
             (<span ng-class="{warn: user['救護檢傷'] == '重傷'}">{{user['救護檢傷']}})</span><br>
+            編號：{{user['編號']}}<br>
             <span ng-if="user['檢傷編號']">檢傷編號: {{user['檢傷編號']}}</span>
             {{user['轉診要求']}}<br>
             {{user['刪除註記']}}<br>
