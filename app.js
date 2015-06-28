@@ -21,9 +21,6 @@ angular.module('app')
         vm.users = response.data.data;
         vm.result = response.data.data;
 
-        var allHospitals = _.unique(_.pluck(vm.users, '收治單位'));
-        console.log(allHospitals);
-
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
             '醫療檢傷', '救護檢傷', '即時動向', '轉診要求', '刪除註記'
