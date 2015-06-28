@@ -81,7 +81,7 @@ angular.module('app')
 
     function getUsers() {
       return $http.get(
-        'https://cdn.rawgit.com/tony1223/098e45623c73274f7ae3/raw/d278f3205f9d8a49531cc926438628103a5bc809/gistfile1.json'
+        'http://tonyq.org/kptaipei/api-20150628.php'
       );
     }
   });
