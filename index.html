@@ -128,12 +128,12 @@
             <td width="20%">
               <b>個人資料</b>
             </td>
-            <td>
+            <td width="20%">
               <b>狀況</b>
             </td>
           </tr>
           <tr ng-repeat="user in vm.result">
-            <td width="20%">
+            <td>
               <div layout="column">
                 {{user['縣市別']}}
               </div>
@@ -143,19 +143,19 @@
                 </a>
               </div>
               <div layout="column">
-                {{user.hospital.phone}}
+                <a ng-href="tel:{{user.hospital.phone}}">{{user.hospital.phone}}</a>
               </div>
               <div layout="column" ng-if="user.service">
                 <a ng-click="vm.showService($event, user['收治單位'])">社服中心</a>
               </div>
             </td>
-            <td width="20%">
+            <td>
               <span class="md-title">{{user['姓名']}}</span>
               {{user['性別']}}
               <span ng-if="user['年齡']">{{user['年齡']}}歲</span>
               {{user['國籍']}}
             </td>
-            <td width="20%">
+            <td>
               <div layout="row">
                 <span ng-class="{danger: user['即時動向'] == '加護病房',  info: user['即時動向'] == '轉院'}" ng-if="user['即時動向'] != '其它'">{{user['即時動向']}}</span>
                 <span ng-if="user['救護檢傷']" ng-class="{danger: user['救護檢傷'] == '重傷'}">({{user['救護檢傷']}})</span>
