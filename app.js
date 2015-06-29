@@ -13,7 +13,7 @@ angular.module('app')
     vm.loaded = false;
     vm.search = search;
     vm.loadMore = loadMore;
-    vm.showHospital = showHospital;
+    vm.showService = showService;
     vm.hospitals = hospitals;
     vm.hospital = {};
 
@@ -48,12 +48,10 @@ angular.module('app')
 
     function processUsers(users) {
       return _.each(users, function(user) {
-        user['即時動向'] = user['即時動向'].trim();
-        user['救護檢傷'] = user['救護檢傷'].trim();
-        user.hospital_tel = (hospital = _.find(hospitals, function(
-          h) {
-          return h['醫院'] === user['收治單位'];
-        })) && hospital['辦公室電話'];
+        user.hospital = hospitals[user['收治單位']];
+        user.service = _.find(services, {
+          '醫院': user['收治單位']
+        });
       });
     }
 
@@ -91,8 +89,8 @@ angular.module('app')
       ga('send', 'event', 'button', 'click', 'query', keyword);
     }
 
-    function showHospital(ev, name) {
-      vm.hospital = _.find(hospitals, {
+    function showService(ev, name) {
+      vm.hospital = _.find(services, {
         '醫院': name
       });
 

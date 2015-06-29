@@ -3,6 +3,9 @@
 <head>
   <title>八仙氣爆案傷者查詢</title>
   <meta charset="utf-8"></meta>
+  <meta name="author" content="Kos Huang">
+  <meta name="keywords" content="八仙樂園 氣爆 爆炸 傷者名單">
+  <meta name="description" content="八仙樂園氣爆案，受傷名眾的名單查詢頁面">
   <meta name="viewport" content="initial-scale=1" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -130,18 +133,20 @@
             </td>
           </tr>
           <tr ng-repeat="user in vm.result">
-            <td width="20%" ng-click="vm.showHospital($event, user['收治單位'])">
+            <td width="20%">
               <div layout="column">
                 {{user['縣市別']}}
               </div>
               <div layout="column">
-                <a ng-if="user.hospital_tel">
-                  {{user['收治單位']}}
+                <a ng-href="https://www.google.com/maps?q={{user.hospital.address}}" target="_blank">
+                  <i class="fa fa-map-marker"></i>{{user['收治單位']}}
                 </a>
-                <span ng-if="!user.hospital_tel" >{{user['收治單位']}}</span>
               </div>
               <div layout="column">
-                {{user.hospital_tel}}
+                {{user.hospital.phone}}
+              </div>
+              <div layout="column" ng-if="user.service">
+                <a ng-click="vm.showService($event, user['收治單位'])">社服中心</a>
               </div>
             </td>
             <td width="20%">
