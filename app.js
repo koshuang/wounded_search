@@ -80,6 +80,15 @@ angular.module('app')
       vm.allResult = vm.searchText && vm.searchText.length <= 5 ? fuse.search(
         vm.searchText) : vm.users;
       vm.result = processPaging(vm.allResult);
+      trackSearchKeyword(vm.searchText);
+    }
+
+    function trackSearchKeyword(keyword) {
+      if (!keyword) {
+        return;
+      }
+
+      ga('send', 'event', 'button', 'click', 'query', keyword);
     }
 
     function showHospital(ev, name) {
