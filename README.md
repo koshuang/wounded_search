@@ -27,3 +27,4 @@
     * angular-material: Material Design
   * Lodash: Functional library
   * Fuse: Fussy search library
+  * GA tracking
