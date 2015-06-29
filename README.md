@@ -19,3 +19,11 @@
     * 即時動態
     * 傷勢
     * 編號 / 檢傷編號
+
+## 使用技術
+
+  * Angular JS
+    * ng-infinite-scrolling: Delay Render 的時機點，在讀取 API 資料後，先 Render 前 40 筆資料，之後再依據 Scroll 做即時 Render
+    * angular-material: Material Design
+  * Lodash: Functional library
+  * Fuse: Fussy search library
