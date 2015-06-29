@@ -10,12 +10,12 @@ angular.module('app')
     };
     var fuse;
 
+    vm.loaded = false;
     vm.search = search;
     vm.loadMore = loadMore;
     vm.showHospital = showHospital;
     vm.hospitals = hospitals;
     vm.hospital = {};
-    vm.loaded = false;
 
     activate();
 

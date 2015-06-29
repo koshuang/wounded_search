@@ -59,20 +59,14 @@
     <h2>八仙爆炸事件傷者查詢</h2>
   </md-toolbar>
 
-  <div ng-hide="vm.loaded">
+  <div ng-if="vm.loaded == false">
     <h2>讀取資料中</h2>
   </div>
-  <div ng-show="vm.loaded">
+  <div ng-if="vm.loaded == true">
     <md-content layout="row">
       <md-card flex class="info">
         <md-card-content layout="column">
           <h2 class="md-title">狀況報告</h2>
-          <div>
-            資料來源：<a ng-href="{{vm.source.url}}" target="_blank">{{vm.source.name}}</a>
-          </div>
-          <div>
-            最後更新時間：{{vm.lastmodify}}
-          </div>
           <div>
             受傷人數：{{vm.users.length}}
           </div>
@@ -81,6 +75,12 @@
           </div>
           <div>
             出院人數：{{(vm.users | filter:{'即時動向': '出院'}).length}} 人
+          </div>
+          <div>
+            資料來源：<a ng-href="{{vm.source.url}}" target="_blank">{{vm.source.name}}</a>
+          </div>
+          <div>
+            最後更新時間：{{vm.lastmodify}}
           </div>
         </md-card-content>
       </md-card>
