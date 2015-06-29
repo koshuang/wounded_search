@@ -122,9 +122,11 @@ angular.module('app')
     };
 
     function getUsers() {
-      return $http.get(
-        'http://tonyq.org/kptaipei/api-20150628.php'
-      );
+      return $http({
+        // url: 'http://tonyq.org/kptaipei/api-20150628.php',
+        url: 'https://gist.githubusercontent.com/koshuang/e14f64b7bfc2c86417b2/raw/a40c5c341a630ff97397153e163af6c40f778140/wounded_list.json?t' +
+          new Date().getTime()
+      });
     }
   });
 
