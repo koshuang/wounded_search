@@ -124,16 +124,22 @@
         <table md-data-table infinite-scroll='vm.loadMore()' infinite-scroll-distance='2'>
           <tr>
             <td width="20%">
-              <b>收治單位</b>
+              <b>個人資料</b>
             </td>
             <td width="20%">
-              <b>個人資料</b>
+              <b>收治單位</b>
             </td>
             <td width="20%">
               <b>狀況</b>
             </td>
           </tr>
           <tr ng-repeat="user in vm.result">
+            <td>
+              <span class="md-title">{{user['姓名']}}</span>
+              {{user['性別']}}
+              <span ng-if="user['年齡']">{{user['年齡']}}歲</span>
+              {{user['國籍']}}
+            </td>
             <td>
               <div layout="column">
                 {{user['縣市別']}}
@@ -149,12 +155,6 @@
               <div layout="column" ng-if="user.service">
                 <a ng-click="vm.showService($event, user['收治單位'])">社服中心</a>
               </div>
-            </td>
-            <td>
-              <span class="md-title">{{user['姓名']}}</span>
-              {{user['性別']}}
-              <span ng-if="user['年齡']">{{user['年齡']}}歲</span>
-              {{user['國籍']}}
             </td>
             <td>
               <div layout="row">
