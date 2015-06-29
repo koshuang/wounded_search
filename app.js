@@ -77,7 +77,7 @@ angular.module('app')
     }
 
     function search() {
-      vm.allResult = vm.searchText && vm.searchText.length < 5 ? fuse.search(
+      vm.allResult = vm.searchText && vm.searchText.length <= 5 ? fuse.search(
         vm.searchText) : vm.users;
       vm.result = processPaging(vm.allResult);
     }
