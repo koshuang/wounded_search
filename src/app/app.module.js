@@ -4,13 +4,15 @@ angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
 
 angular.module('app')
   .factory('UserService', function($http) {
+    var cache;
     return {
       getUsers: getUsers
     };
 
     function getUsers() {
       return $http({
-        url: 'https://raw.githubusercontent.com/tpe-doit/color-explosion-20150628/master/gistfile1.json'
+        url: 'https://raw.githubusercontent.com/tpe-doit/color-explosion-20150628/master/gistfile1.json',
+        cache: true
       });
     }
   })
@@ -29,6 +31,12 @@ angular.module('app')
         templateUrl: 'src/app/search.html',
         controller: 'SearchController',
         controllerAs: 'vm'
+      })
+      .state('home.hospitalStatistic', {
+        url: 'hospital-statistics',
+        templateUrl: 'src/app/hospital-statistics.html',
+        // controller: 'HospitalStatisticsController',
+        // controllerAs: 'vm'
       });
   })
   .run(function($rootScope, $state) {
