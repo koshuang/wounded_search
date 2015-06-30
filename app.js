@@ -40,7 +40,7 @@ angular.module('app')
 
         fuse = new Fuse(vm.users, {
           keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
-            '醫療檢傷', '救護檢傷', '即時動向', '轉診要求', '刪除註記'
+            '醫療檢傷', '救護檢傷', '即時動向', '轉診要求'
           ]
         });
       });
@@ -48,6 +48,10 @@ angular.module('app')
 
     function processUsers(users) {
       return _.each(users, function(user) {
+        user['醫療檢傷'] = user['醫療檢傷'].trim();
+        user['救護檢傷'] = user['救護檢傷'].trim();
+        user['即時動向'] = user['即時動向'].trim();
+
         user.hospital = hospitals[user['收治單位']];
         user.service = _.find(services, {
           '醫院': user['收治單位']
@@ -123,9 +127,7 @@ angular.module('app')
 
     function getUsers() {
       return $http({
-        // url: 'http://tonyq.org/kptaipei/api-20150628.php',
-        url: 'https://gist.githubusercontent.com/koshuang/e14f64b7bfc2c86417b2/raw/e20038fdd3731632a741bf47394828ba5d85c045/wounded_list.json?t' +
-          new Date().getTime()
+        url: 'https://raw.githubusercontent.com/kptaipei/coloe-issue-20150628/master/gistfile1.json'
       });
     }
   });
