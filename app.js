@@ -127,7 +127,7 @@ angular.module('app')
 
     function getUsers() {
       return $http({
-        url: 'https://raw.githubusercontent.com/kptaipei/coloe-issue-20150628/master/gistfile1.json'
+        url: 'https://raw.githubusercontent.com/tpe-doit/color-explosion-20150628/master/gistfile1.json'
       });
     }
   });
