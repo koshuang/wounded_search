@@ -143,7 +143,7 @@ angular.module('app')
       })
       .state('home.search', {
         url: 'search',
-        templateUrl: 'search.html',
+        templateUrl: 'app/search.html',
         controller: 'HomeController',
         controllerAs: 'vm'
       });
