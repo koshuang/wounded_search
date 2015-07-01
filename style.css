@@ -1,0 +1,47 @@
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+  cursor: pointer;
+}
+
+a {
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.md-title {
+  margin-top: 0;
+}
+
+.primary {
+  background: #81C784;
+}
+
+.info {
+  background: #2196F3;
+}
+
+.success {
+  background: #EEFF41;
+}
+
+.warn {
+  background: #FF9800;
+}
+
+.danger {
+  background: #F44336;
+}
+
+.right {
+  text-align: right;
+}
+
+@media screen and (max-width: 479px) {
+  td {
+    padding: 0 0 0 5px !important;
+  }
+}
