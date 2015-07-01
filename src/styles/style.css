@@ -66,6 +66,9 @@ a:hover {
   top:13px;
 }
 
+.card-default{
+  background:#EDEBEB;
+}
 @media screen and (max-width: 479px) {
   td {
     padding: 0 0 0 5px !important;
