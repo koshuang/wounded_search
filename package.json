@@ -1,0 +1,29 @@
+{
+  "name": "wounded_search",
+  "version": "0.0.1",
+  "description": "Wounded Search",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-webserver": "^0.9.1"
+  },
+  "devDependencies": {
+    "gulp-webserver": "^0.9.1"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/koshuang/wounded_search.git"
+  },
+  "keywords": [
+    "wounded",
+    "search"
+  ],
+  "author": "Kos Huang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koshuang/wounded_search/issues"
+  },
+  "homepage": "https://github.com/koshuang/wounded_search"
+}

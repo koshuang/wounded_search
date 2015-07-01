@@ -17,129 +17,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body  ng-app="app" ng-controller="HomeController as vm">
+<body ng-app="app">
   <md-toolbar layout="row">
     <h2>八仙氣爆案傷者查詢</h2>
   </md-toolbar>
 
-  <div ng-if="vm.loaded == false">
-    <h2>讀取資料中</h2>
-  </div>
-  <div ng-if="vm.loaded == true">
-    <md-content layout="row">
-      <md-card flex class="info">
-        <md-card-content layout="column">
-          <h2 class="md-title">狀況報告</h2>
-          <div>
-            受傷人數：{{vm.users.length}}
-          </div>
-          <div>
-            重傷：{{(vm.users | filter:{'救護檢傷': '重傷'}).length}} 人
-          </div>
-          <div>
-            檢傷一級：{{(vm.users | filter:{'醫療檢傷': '檢傷一級'}).length}} 人
-          </div>
-          <div>
-            檢傷二級：{{(vm.users | filter:{'醫療檢傷': '檢傷二級'}).length}} 人
-          </div>
-          <div>
-            出院人數：{{(vm.users | filter:{'即時動向': '出院'}).length}} 人
-          </div>
-          <div>
-            資料來源：<a ng-href="{{vm.source.url}}" target="_blank">{{vm.source.name}}</a>
-          </div>
-          <div>
-            最後更新時間：{{vm.lastmodify}}
-          </div>
-        </md-card-content>
-      </md-card>
-      <md-card flex class="danger">
-        <md-card-content>
-          <h2 class="md-title">提醒</h2>
-          <p>
-            於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
-            <a href="tel:02-27206528">02-27206528</a>
-          </p>
-          <p>
-            <a target="_blank" href="https://tw.news.yahoo.com/%E5%B9%AB%E5%8A%A9%E5%85%AB%E4%BB%99%E5%82%B7%E8%80%85-%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%81%9A%E5%BE%97%E6%9B%B4%E5%A4%9A-034650399.html">幫助八仙傷者 你可以做得更多</a><br>
-            <a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json">全國重度級急救責任醫院急診即時訊息</a>
-          </p>
-        </md-card-content>
-      </md-card>
-    </md-content>
+  <div ui-view></div>
 
-    <md-content>
-      <md-input-container md-no-float="">
-        <input ng-model="vm.searchText" placeholder="輸入搜尋條件, 例如： 長庚 或是 林文君" ng-change="vm.search()" maxlength="5">
-      </md-input-container>
-
-      <md-data-table-container>
-        <table md-data-table infinite-scroll='vm.loadMore()' infinite-scroll-distance='2'>
-          <tr>
-            <td width="20%">
-              <b>個人資料與狀況</b>
-            </td>
-            <td width="20%">
-              <b>收治單位</b>
-            </td>
-            <td width="20%">
-              <b>備註</b>
-            </td>
-          </tr>
-          <tr ng-repeat="user in vm.result">
-            <td>
-              <span class="md-title">{{user['姓名']}}</span>
-              {{user['性別']}}
-              <span ng-if="user['年齡']">{{user['年齡']}}歲</span>
-              {{user['國籍']}}
-              <div layout="row">
-                <span ng-class="{danger: user['即時動向'] == '加護病房',  info: user['即時動向'] == '轉院'}" ng-if="user['即時動向'] != '其它'">{{user['即時動向']}}</span>
-                <span ng-if="user['轉診要求']">:{{user['轉診要求']}}</span>
-              </div>
-              <div layout="row">
-                <span ng-if="user['救護檢傷']" ng-class="{danger: user['救護檢傷'] == '重傷',  warn: user['救護檢傷'] == '中傷'}">{{user['救護檢傷']}}</span>
-                <span ng-if="user['醫療檢傷']" ng-class="{danger: user['醫療檢傷'] == '檢傷一級',  warn: user['醫療檢傷'] == '檢傷二級'}">:{{user['醫療檢傷']}}</span>
-              </div>
-            </td>
-            <td>
-              <div layout="column">
-                {{user['縣市別']}}
-              </div>
-              <div layout="column">
-                <a ng-href="https://www.google.com/maps?q={{user.hospital.address}}" target="_blank">
-                  <i class="fa fa-map-marker"></i>{{user['收治單位']}}
-                </a>
-              </div>
-              <div layout="column">
-                <a ng-href="tel:{{user.hospital.phone}}">{{user.hospital.phone}}</a>
-              </div>
-              <div layout="column" ng-if="user.service">
-                <a ng-click="vm.showService($event, user['收治單位'])">社服中心</a>
-              </div>
-            </td>
-            <td>
-              <div layout="column" ng-if="user['編號']">
-                編號：{{user['編號']}}
-              </div>
-              <div layout="column" ng-if="user['檢傷編號']">
-                <span>檢傷編號: {{user['檢傷編號']}}</span>
-              </div>
-              <div layout="column" ng-if="user['轉診要求']">
-                <span>轉診要求: {{user['轉診要求']}}</span>
-              </div>
-
-            </td>
-          </tr>
-        </table>
-      </md-data-table-container>
-    </md-content>
-  </div>
 
   <!-- Angular Material Dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 
   <!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>

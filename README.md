@@ -30,3 +30,9 @@ http://koshuang.github.io/wounded_search/
   * Lodash: Functional library
   * Fuse: Fussy search library
   * GA tracking
+
+## Contribution
+
+  * npm install gulp -g
+  * npm install
+  * gulp serve
