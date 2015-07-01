@@ -1,5 +1,7 @@
 # 八仙傷患名單搜尋
 
+http://koshuang.github.io/wounded_search/
+
 ## 功能
 
 * 狀況報告
