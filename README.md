@@ -24,6 +24,8 @@ http://koshuang.github.io/wounded_search/
 
 ## 使用技術
 
+  * gulp
+    * gulp-webserver
   * Angular JS
     * ng-infinite-scrolling: Delay Render 的時機點，在讀取 API 資料後，先 Render 前 40 筆資料，之後再依據 Scroll 做即時 Render
     * angular-material: Material Design
