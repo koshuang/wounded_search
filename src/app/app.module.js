@@ -100,11 +100,7 @@ angular.module('app')
         return;
       }
 
-      $analytics.eventTrack('query', {
-        category: 'fussy-search',
-        label: 'keyword',
-        value: keyword
-      });
+      $analytics.pageTrack('/search?q=' + keyword);
 
       $timeout.cancel(keywordTimer);
     }
