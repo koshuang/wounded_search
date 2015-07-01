@@ -1,4 +1,6 @@
-angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router']);
+angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
+  'angulartics', 'angulartics.google.analytics'
+]);
 
 angular.module('app')
   .controller('HomeController', function($mdDialog, UserService) {
