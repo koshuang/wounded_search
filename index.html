@@ -22,8 +22,13 @@
     <h2>八仙氣爆案傷者查詢</h2>
   </md-toolbar>
 
-  <div ui-view></div>
+  <md-tabs md-dynamic-height md-border-bottom>
+    <md-tab label="傷者查詢" ui-sref="home.search"></md-tab>
+    <md-tab label="醫院統計" ui-sref="home.hospitalStatistic"></md-tab>
+    </md-tab>
+  </md-tabs>
 
+  <div ui-view></div>
 
   <!-- Angular Material Dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
