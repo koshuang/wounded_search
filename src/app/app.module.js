@@ -3,7 +3,8 @@ angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
 ]);
 
 angular.module('app')
-  .controller('HomeController', function($mdDialog, UserService) {
+  .controller('HomeController', function($mdDialog, $analytics, $timeout,
+    UserService) {
     var vm = this;
     var PAGE_COUNT = 20;
     var paging = {
@@ -11,6 +12,7 @@ angular.module('app')
       total: 1
     };
     var fuse;
+    var keywordTimer;
 
     vm.loaded = false;
     vm.search = search;
@@ -81,10 +83,16 @@ angular.module('app')
     }
 
     function search() {
+
+
       vm.allResult = vm.searchText && vm.searchText.length <= 5 ? fuse.search(
         vm.searchText) : vm.users;
       vm.result = processPaging(vm.allResult);
-      trackSearchKeyword(vm.searchText);
+
+      //Track keyword after user stop typing
+      $timeout.cancel(keywordTimer);
+      keywordTimer = $timeout(trackSearchKeyword.bind(null, vm.searchText),
+        5000);
     }
 
     function trackSearchKeyword(keyword) {
@@ -92,7 +100,13 @@ angular.module('app')
         return;
       }
 
-      ga('send', 'event', 'button', 'click', 'query', keyword);
+      $analytics.eventTrack('query', {
+        category: 'fussy-search',
+        label: 'keyword',
+        value: keyword
+      });
+
+      $timeout.cancel(keywordTimer);
     }
 
     function showService(ev, name) {
