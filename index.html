@@ -11,21 +11,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
   <!-- Angular Material CSS now available via Google CDN; version 0.10 used here -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css">
   <!-- md-data-table -->
   <link rel="stylesheet" href="src/styles/md-data-table.min.css">
+
+
 
   <link rel="stylesheet" href="src/styles/style.css">
 </head>
 
-<body ng-app="app">
+
+<body ng-app="app" ng-cloak>
   <md-toolbar layout="row" class="nav">
     <h3 class="nav__title">八仙氣爆案傷者查詢</h3>
-    <a class="nav__btn -right">即時狀況</a>
+    <!-- <a class="nav__btn -right">即時狀況</a> -->
+
   </md-toolbar>
 
-  <md-tabs md-dynamic-height md-border-bottom>
+  <md-tabs md-dynamic-height md-border-bottom md-selected="vm.selectedTab">
     <md-tab label="傷者查詢" ui-sref="home.search"></md-tab>
-    <md-tab label="醫院統計" ui-sref="home.hospitalStatistic"></md-tab>
+    <md-tab label="狀況統計" ui-sref="home.status"></md-tab>
     </md-tab>
   </md-tabs>
 
@@ -42,14 +47,17 @@
   <!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/1.2.2/fuse.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/ramda/0.15.1/ramda.min.js"></script>
 
   <script src="src/app/libs/ng-infinite-scroll.js"></script>
   <script src="src/app/libs/md-data-table.min.js"></script>
+  <script src="src/app/libs/angular-nvd3.min.js"></script>
   <script src="src/app/data.js"></script>
   <script src="src/app/app.module.js"></script>
   <script src="src/app/search.js"></script>
+  <script src="src/app/status.js"></script>
 
   <script>
     (function(i, s, o, g, r, a, m) {

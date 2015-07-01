@@ -47,16 +47,14 @@ angular.module('app')
     }
 
     function processUsers(users) {
-      return _.each(users, function(user) {
+      return R.forEach(function(user) {
         user['醫療檢傷'] = user['醫療檢傷'].trim();
         user['救護檢傷'] = user['救護檢傷'].trim();
         user['即時動向'] = user['即時動向'].trim();
 
         user.hospital = hospitals[user['收治單位']];
-        user.service = _.find(services, {
-          '醫院': user['收治單位']
-        });
-      });
+        user.service = R.find(R.propEq('醫院', user['收治單位']), services);
+      }, users);
     }
 
     function processPaging(users) {
@@ -80,7 +78,6 @@ angular.module('app')
 
     function search() {
 
-
       vm.allResult = vm.searchText && vm.searchText.length <= 5 ? fuse.search(
         vm.searchText) : vm.users;
       vm.result = processPaging(vm.allResult);
@@ -102,9 +99,7 @@ angular.module('app')
     }
 
     function showService(ev, name) {
-      vm.hospital = _.find(services, {
-        '醫院': name
-      });
+      vm.hospital = R.find(R.propEq('醫院', name), services);
 
       $mdDialog.show({
         resolve: {
@@ -113,7 +108,7 @@ angular.module('app')
           }
         },
         controller: DialogController,
-        templateUrl: 'hospital.html',
+        templateUrl: 'src/app/hospital.html',
         parent: angular.element(document.body),
         targetEvent: ev
       });

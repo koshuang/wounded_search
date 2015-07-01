@@ -1,0 +1,26 @@
+<div layout="row" layout-sm="column" layout-align="center" layout-wrap>
+  <md-card flex="25" flex-sm="100">
+    <md-card-content>
+      <h2 class="md-title">即時動向</h2>
+      <nvd3 data="vm.allStatus" options="vm.options"/>
+    </md-card-content>
+  </md-card>
+  <md-card flex="25" flex-sm="100">
+    <md-card-content>
+      <h2 class="md-title">傷重狀況</h2>
+      <nvd3 data="vm.injuries" options="vm.options"/>
+    </md-card-content>
+  </md-card>
+  <md-card flex="25" flex-sm="100">
+    <md-card-content>
+      <h2 class="md-title">檢傷狀況</h2>
+      <nvd3 data="vm.formalInjuries" options="vm.options"/>
+    </md-card-content>
+  </md-card>
+  <md-card flex="25" flex-sm="100">
+    <md-card-content>
+      <h2 class="md-title">各大醫院人數</h2>
+      <nvd3 data="vm.hospitals" options="vm.options"/>
+    </md-card-content>
+  </md-card>
+</div>

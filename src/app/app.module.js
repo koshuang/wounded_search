@@ -1,8 +1,16 @@
 angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
-  'angulartics', 'angulartics.google.analytics'
+  'angulartics', 'angulartics.google.analytics', 'nvd3'
 ]);
 
 angular.module('app')
+  .controller('HomeController', function($rootScope, $state, UserService) {
+    var indexes = {
+      'home.search': 0,
+      'home.status': 1
+    };
+
+    $rootScope.vm.selectedTab = indexes[$state.current.name];
+  })
   .factory('UserService', function($http) {
     var cache;
     return {
@@ -24,7 +32,9 @@ angular.module('app')
     $stateProvider
       .state('home', {
         url: '/',
-        template: '<div ui-view></div>'
+        template: '<div ui-view></div>',
+        controller: 'HomeController',
+        controllerAs: 'vm'
       })
       .state('home.search', {
         url: 'search',
@@ -32,11 +42,11 @@ angular.module('app')
         controller: 'SearchController',
         controllerAs: 'vm'
       })
-      .state('home.hospitalStatistic', {
-        url: 'hospital-statistics',
-        templateUrl: 'src/app/hospital-statistics.html',
-        // controller: 'HospitalStatisticsController',
-        // controllerAs: 'vm'
+      .state('home.status', {
+        url: 'status',
+        templateUrl: 'src/app/status.html',
+        controller: 'StatusController',
+        controllerAs: 'vm'
       });
   })
   .run(function($rootScope, $state) {
