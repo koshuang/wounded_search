@@ -1,5 +1,8 @@
 <div ng-if="vm.loaded == false">
-  <h2>讀取資料中</h2>
+  <md-content layout="column" layout-align="center center">
+    <h2>讀取資料中</h2>
+    <md-progress-circular class="md-warn md-hue-3" md-mode="indeterminate"></md-progress-circular>
+  </md-content>
 </div>
 <div ng-if="vm.loaded == true">
   <md-content layout="row" layout-sm="column">
