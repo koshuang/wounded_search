@@ -25,7 +25,10 @@ angular.module('app')
     }
 
     function go(index) {
-      $state.go(index === 0 ? 'home.search' : 'home.status');
+      var target = index === 0 ? 'home.search' : 'home.status';
+      if (target !== $state.current.name) {
+        $state.go(target);
+      }
     }
   })
   .factory('UserService', function($http) {
