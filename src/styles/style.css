@@ -40,6 +40,32 @@ a:hover {
   text-align: right;
 }
 
+.nav{
+  background:#58b4c6;
+  padding-right:10px;
+  padding-left:10px;
+  position:relative;
+}
+.nav__btn{
+  background:#187f93;
+  color:#fdf899;
+  padding:13px;
+  cursor:pointer;
+}
+.nav__btn:hover{
+  text-decoration: none;
+  background:#ffffff;
+  color:#187f93;
+}
+.nav__title{
+
+}
+.nav__btn.-right{
+  position:absolute;
+  right:10px;
+  top:13px;
+}
+
 @media screen and (max-width: 479px) {
   td {
     padding: 0 0 0 5px !important;
