@@ -22,10 +22,20 @@
 
 
 <body ng-app="app" ng-cloak md-swipe-left="vm.onSwipeLeft()" md-swipe-right="vm.onSwipeRight()">
-  <md-toolbar layout="row" class="nav">
-    <h3 class="nav__title">八仙氣爆案傷者查詢</h3>
+  <!-- <md-toolbar layout="row" class="nav"> -->
+    <!-- <h3 class="nav__title">八仙氣爆案傷者查詢</h3> -->
     <!-- <a class="nav__btn -right">即時狀況</a> -->
+  <!-- </md-toolbar> -->
 
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Menu">
+        <md-icon md-svg-icon="src/images/menu.svg"></md-icon>
+      </md-button>
+      <h2>
+        <span>八仙氣爆案傷者查詢</span>
+      </h2>
+    </div>
   </md-toolbar>
 
   <md-tabs md-dynamic-height md-border-bottom md-selected="vm.selectedTab">
