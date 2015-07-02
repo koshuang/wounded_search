@@ -1,5 +1,5 @@
 angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
-  'angulartics', 'angulartics.google.analytics'
+  'angulartics', 'angulartics.google.analytics', 'nvd3'
 ]);
 
 angular.module('app')
@@ -35,8 +35,8 @@ angular.module('app')
       .state('home.hospitalStatistic', {
         url: 'hospital-statistics',
         templateUrl: 'src/app/hospital-statistics.html',
-        // controller: 'HospitalStatisticsController',
-        // controllerAs: 'vm'
+        controller: 'HospitalStatisticsController',
+        controllerAs: 'vm'
       });
   })
   .run(function($rootScope, $state) {
