@@ -34,8 +34,8 @@ angular.module('app')
       })
       .state('home.hospitalStatistic', {
         url: 'hospital-statistics',
-        templateUrl: 'src/app/hospital-statistics.html',
-        controller: 'HospitalStatisticsController',
+        templateUrl: 'src/app/status.html',
+        controller: 'StatusController',
         controllerAs: 'vm'
       });
   })

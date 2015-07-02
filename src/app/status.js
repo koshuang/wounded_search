@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('HospitalStatisticsController', function(UserService) {
+  .controller('StatusController', function(UserService) {
     var vm = this;
     var getHospitals = getHospitalsFn();
 
