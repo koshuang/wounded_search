@@ -4,12 +4,29 @@ angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
 
 angular.module('app')
   .controller('HomeController', function($rootScope, $state, UserService) {
+
     var indexes = {
       'home.search': 0,
       'home.status': 1
     };
 
     $rootScope.vm.selectedTab = indexes[$state.current.name];
+    $rootScope.vm.onSwipeLeft = onSwipeLeft;
+    $rootScope.vm.onSwipeRight = onSwipeRight;
+
+    function onSwipeLeft() {
+      $rootScope.vm.selectedTab = --$rootScope.vm.selectedTab % 2;
+      go($rootScope.vm.selectedTab);
+    }
+
+    function onSwipeRight() {
+      $rootScope.vm.selectedTab = ++$rootScope.vm.selectedTab % 2;
+      go($rootScope.vm.selectedTab);
+    }
+
+    function go(index) {
+      $state.go(index === 0 ? 'home.search' : 'home.status');
+    }
   })
   .factory('UserService', function($http) {
     var cache;
