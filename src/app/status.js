@@ -27,7 +27,8 @@ angular.module('app')
       UserService.getUsers()
         .then(setUsers)
         .then(hospitalStatistic)
-        .then(injuryStatistic);
+        .then(injuryStatistic)
+        .then(statusStatistic);
     }
 
     function setUsers(response) {
@@ -49,9 +50,7 @@ angular.module('app')
     }
 
     function injuryStatistic() {
-      var groupByHospitalName = R.groupBy(function(u) {
-        return u['救護檢傷'];
-      });
+      var groupByHospitalName = R.groupBy(R.prop('救護檢傷'));
 
       var createInjuries = R.mapObjIndexed(function(users, injury) {
         return {
@@ -70,14 +69,40 @@ angular.module('app')
           value: h.users.length
         };
       }, vm.injuries);
+    }
 
-      log(vm.injuries);
+    function statusStatistic() {
+      var groupByHospitalName = R.groupBy(function(u) {
+        var status = u['即時動向'];
+
+        if (status.indexOf('自動出院') !== -1) {
+          return '出院';
+        }
+
+        return status;
+      });
+
+      var createallStatus = R.mapObjIndexed(function(users, status) {
+        return {
+          name: status,
+          users: users
+        };
+      });
+
+      var doit = R.compose(R.values, createallStatus, groupByHospitalName);
+
+      vm.allStatus = doit(vm.users);
+
+      vm.allStatus = R.map(function(h) {
+        return {
+          key: h.name || '',
+          value: h.users.length
+        };
+      }, vm.allStatus);
     }
 
     function getHospitalsFn() {
-      var groupByHospitalName = R.groupBy(function(u) {
-        return u['收治單位'];
-      });
+      var groupByHospitalName = R.groupBy(R.prop('收治單位'));
 
       var createHospitals = R.mapObjIndexed(function(users, hospital) {
         return {
