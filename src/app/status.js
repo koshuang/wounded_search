@@ -6,7 +6,8 @@ angular.module('app')
     vm.options = {
       chart: {
         type: 'pieChart',
-        height: 600,
+        height: document.getElementsByTagName('md-card-content')[0].clientWidth -
+          50,
         x: function(d) {
           return d.key + ' (' + d.value + ')';
         },
