@@ -13,6 +13,9 @@ angular.module('app')
         y: function(d) {
           return d.value;
         },
+        valueFormat: function(d) {
+          return d3.format('d')(d);
+        },
         showLabels: true,
         showLegend: false,
         transitionDuration: 500,
