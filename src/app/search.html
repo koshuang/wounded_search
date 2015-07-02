@@ -23,40 +23,42 @@
     </md-card>
   </md-content>
 
-  <md-content>
+  <md-content flex class="md-padding">
     <md-input-container md-no-float="">
       <input ng-model="vm.searchText" placeholder="輸入搜尋條件, 例如： 長庚 或是 林文君" ng-change="vm.search()" maxlength="5">
     </md-input-container>
 
     <md-data-table-container>
-      <table md-data-table infinite-scroll='vm.loadMore()' infinite-scroll-distance='2'>
+      <table md-data-table infinite-scroll='vm.loadMore()' infinite-scroll-distance='2' class="table-default">
         <tr>
           <td width="20%">
-            <b>個人資料與狀況</b>
+            <b>個人資料</b>
           </td>
           <td width="20%">
             <b>收治單位</b>
           </td>
           <td width="20%">
+            <b>就診狀況</b>
+          </td>
+          <td width="20%">
             <b>備註</b>
           </td>
+
         </tr>
-        <tr ng-repeat="user in vm.result">
-          <td>
-            <span class="md-title">{{user['姓名']}}</span>
-            {{user['性別']}}
-            <span ng-if="user['年齡']">{{user['年齡']}}歲</span>
-            {{user['國籍']}}
+        <tr ng-repeat="user in vm.result" ng-class="{danger__tr: user['即時動向'] == '加護病房',  info__tr: user['即時動向'] == '轉院' ,success__tr: user['即時動向'] == '出院'}">
+          <td class="table-default__td">
             <div layout="row">
-              <span ng-class="{danger: user['即時動向'] == '加護病房',  info: user['即時動向'] == '轉院'}" ng-if="user['即時動向'] != '其它'">{{user['即時動向']}}</span>
-              <span ng-if="user['轉診要求']">:{{user['轉診要求']}}</span>
+              <span class="md-title" style="margin-right:5px;">{{user['姓名']}}</span>
+              {{user['性別']}}
             </div>
             <div layout="row">
-              <span ng-if="user['救護檢傷']" ng-class="{danger: user['救護檢傷'] == '重傷',  warn: user['救護檢傷'] == '中傷'}">{{user['救護檢傷']}}</span>
-              <span ng-if="user['醫療檢傷']" ng-class="{danger: user['醫療檢傷'] == '檢傷一級',  warn: user['醫療檢傷'] == '檢傷二級'}">:{{user['醫療檢傷']}}</span>
+              <span ng-if="user['年齡']" style="margin-right:5px;">{{user['年齡']}}歲</span>
+              <span>{{user['國籍']}}</span>
             </div>
+
+
           </td>
-          <td>
+          <td class="table-default__td">
             <div layout="column">
               {{user['縣市別']}}
             </div>
@@ -72,7 +74,17 @@
               <a ng-click="vm.showService($event, user['收治單位'])">社服中心</a>
             </div>
           </td>
-          <td>
+          <td class="table-default__td">
+            <div layout="row">
+              <span ng-class="{danger__lab: user['即時動向'] == '加護病房',  info__lab: user['即時動向'] == '轉院'}" ng-if="user['即時動向'] != '其它'">{{user['即時動向']}}</span>
+              <span ng-if="user['轉診要求']" class="padding-lab">{{user['轉診要求']}}</span>
+            </div>
+            <div layout="row">
+              <span style="margin-right:5px;"class="padding-lab" ng-if="user['救護檢傷']" ng-class="{danger__lab: user['救護檢傷'] == '重傷',  warn__lab: user['救護檢傷'] == '中傷'}">{{user['救護檢傷']}}</span>
+              <span class="padding-lab" ng-if="user['醫療檢傷']" ng-class="{danger__lab: user['醫療檢傷'] == '檢傷一級',  warn__lab: user['醫療檢傷'] == '檢傷二級'}">{{user['醫療檢傷']}}</span>
+            </div>
+          </td>
+          <td class="table-default__td">
             <div layout="column" ng-if="user['編號']">
               編號：{{user['編號']}}
             </div>
@@ -80,7 +92,7 @@
               <span>檢傷編號: {{user['檢傷編號']}}</span>
             </div>
             <div layout="column" ng-if="user['轉診要求']">
-              <span>轉診要求: {{user['轉診要求']}}</span>
+              <span >轉診要求: {{user['轉診要求']}}</span>
             </div>
 
           </td>
