@@ -44,7 +44,7 @@ angular.module('app')
       });
     }
   })
-  .config(function($urlRouterProvider, $stateProvider) {
+  .config(function($urlRouterProvider, $stateProvider, $mdThemingProvider) {
     $urlRouterProvider
       .otherwise('/');
 
@@ -68,6 +68,10 @@ angular.module('app')
         controller: 'StatusController',
         controllerAs: 'vm'
       });
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('pink')
+      .accentPalette('orange');
   })
   .run(function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
