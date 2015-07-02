@@ -38,6 +38,7 @@ angular.module('app')
         .then(setUsers)
         .then(hospitalStatistic)
         .then(injuryStatistic)
+        .then(formalInjuryStatistic)
         .then(statusStatistic);
     }
 
@@ -73,6 +74,20 @@ angular.module('app')
           value: h.users.length
         };
       }, vm.injuries);
+    }
+
+    function formalInjuryStatistic() {
+      var doit = R.compose(R.values, createChartData, groupByHospitalName(
+        '醫療檢傷'));
+
+      vm.formalInjuries = doit(vm.users);
+
+      vm.formalInjuries = R.map(function(h) {
+        return {
+          key: h.name || '其他',
+          value: h.users.length
+        };
+      }, vm.formalInjuries);
     }
 
     function statusStatistic() {
