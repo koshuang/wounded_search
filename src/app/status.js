@@ -1,7 +1,6 @@
 angular.module('app')
   .controller('StatusController', function(UserService) {
     var vm = this;
-    var getHospitals = getHospitalsFn();
 
     vm.options = {
       chart: {
@@ -21,6 +20,14 @@ angular.module('app')
       }
     };
 
+    var createChartData = R.mapObjIndexed(function(users, name) {
+      return {
+        name: name,
+        users: users
+      };
+    });
+    var groupByHospitalName = R.compose(R.groupBy, R.prop);
+
     activate();
 
     function activate() {
@@ -37,6 +44,8 @@ angular.module('app')
     }
 
     function hospitalStatistic() {
+      var getHospitals = R.compose(R.values, createChartData,
+        groupByHospitalName('收治單位'));
       var hospitalUsers = getHospitals(vm.users);
 
       vm.hospitals = R.map(function(h) {
@@ -50,16 +59,8 @@ angular.module('app')
     }
 
     function injuryStatistic() {
-      var groupByHospitalName = R.groupBy(R.prop('救護檢傷'));
-
-      var createInjuries = R.mapObjIndexed(function(users, injury) {
-        return {
-          name: injury,
-          users: users
-        };
-      });
-
-      var doit = R.compose(R.values, createInjuries, groupByHospitalName);
+      var doit = R.compose(R.values, createChartData, groupByHospitalName(
+        '救護檢傷'));
 
       vm.injuries = doit(vm.users);
 
@@ -82,14 +83,7 @@ angular.module('app')
         return status;
       });
 
-      var createallStatus = R.mapObjIndexed(function(users, status) {
-        return {
-          name: status,
-          users: users
-        };
-      });
-
-      var doit = R.compose(R.values, createallStatus, groupByHospitalName);
+      var doit = R.compose(R.values, createChartData, groupByHospitalName);
 
       vm.allStatus = doit(vm.users);
 
@@ -99,20 +93,6 @@ angular.module('app')
           value: h.users.length
         };
       }, vm.allStatus);
-    }
-
-    function getHospitalsFn() {
-      var groupByHospitalName = R.groupBy(R.prop('收治單位'));
-
-      var createHospitals = R.mapObjIndexed(function(users, hospital) {
-        return {
-          name: hospital,
-          users: users
-        };
-      });
-
-      return R.compose(R.values, createHospitals,
-        groupByHospitalName);
     }
 
     function log(obj) {
