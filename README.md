@@ -4,6 +4,8 @@ http://koshuang.github.io/wounded_search/
 
 ## 功能
 
+* 操作
+  * 在每個頁面上左右滑動可切換 Tab
 * 狀況報告
   * 受傷 / 重傷 / 出院 人數
   * 資料來源
