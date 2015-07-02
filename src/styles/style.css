@@ -16,6 +16,10 @@ a:hover {
   margin-top: 0;
 }
 
+.padding-lab{
+  margin:5px 0 0 0;
+  padding:5px 0;
+}
 .primary {
   background: #81C784;
 }
@@ -23,17 +27,53 @@ a:hover {
 .info {
   background: #2196F3;
 }
-
+.info__tr{
+  background:rgba(163, 237, 230, 0.38);
+}
+.info__lab{
+  text-align:center;
+  margin:5px 5px 0 0;
+  background:#35c6b2;
+  color:#fff;
+  padding:5px 10px;
+  font-weight:bolder;
+  border-radius:8px;
+}
 .success {
   background: #EEFF41;
+}
+.success__tr{
+  background:rgba(198, 246, 223, 0.53);
 }
 
 .warn {
   background: #FF9800;
 }
+.warn__lab{
+  text-align:center;
+  margin:5px 5px 0 0;
+  background:#f49600;
+  color:#fff;
+  padding:5px 10px;
+  font-weight:bolder;
+  border-radius:8px;
+}
 
 .danger {
   background: #F44336;
+}
+.danger__tr{
+  background:rgba(248, 187, 187, 0.52);
+}
+.danger__lab{
+  text-align:center;
+  margin:5px 5px 0 0;
+
+  background:#E9635E;
+  color:#fff;
+  padding:5px 10px;
+  font-weight:bolder;
+  border-radius:8px;
 }
 
 .right {
@@ -69,6 +109,18 @@ a:hover {
 .card-default{
   background:#EDEBEB;
 }
+
+.table-default > tr > td{
+  padding-top:10px !important;
+  padding-bottom:10px !important;
+}
+.table-default__td{
+  padding-top:10px !important;
+  padding-bottom:10px !important;
+}
+
+
+
 @media screen and (max-width: 479px) {
   td {
     padding: 0 0 0 5px !important;
