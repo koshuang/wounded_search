@@ -25,7 +25,8 @@ angular.module('app')
     function activate() {
       UserService.getUsers()
         .then(setUsers)
-        .then(statistic);
+        .then(hospitalStatistic)
+        .then(injuryStatistic);
     }
 
     function setUsers(response) {
@@ -33,7 +34,7 @@ angular.module('app')
       vm.users = data.data;
     }
 
-    function statistic() {
+    function hospitalStatistic() {
       var hospitalUsers = getHospitals(vm.users);
 
       vm.hospitals = R.map(function(h) {
@@ -44,19 +45,38 @@ angular.module('app')
       }, hospitalUsers);
 
       vm.hospitals = R.sortBy(R.prop('value'), vm.hospitals);
+    }
 
-      console.log(hospitalUsers, vm.hospitals);
+    function injuryStatistic() {
+      var groupByHospitalName = R.groupBy(function(u) {
+        return u['救護檢傷'];
+      });
+
+      var createInjuries = R.mapObjIndexed(function(users, injury) {
+        return {
+          name: injury,
+          users: users
+        };
+      });
+
+      var doit = R.compose(R.values, createInjuries, groupByHospitalName);
+
+      vm.injuries = doit(vm.users);
+
+      vm.injuries = R.map(function(h) {
+        return {
+          key: h.name || '其他',
+          value: h.users.length
+        };
+      }, vm.injuries);
+
+      log(vm.injuries);
     }
 
     function getHospitalsFn() {
       var groupByHospitalName = R.groupBy(function(u) {
         return u['收治單位'];
       });
-
-      var log = function(obj) {
-        console.log(obj);
-        return obj;
-      };
 
       var createHospitals = R.mapObjIndexed(function(users, hospital) {
         return {
@@ -65,17 +85,12 @@ angular.module('app')
         };
       });
 
-      return R.compose(R.values, createHospitals, log,
+      return R.compose(R.values, createHospitals,
         groupByHospitalName);
     }
 
-    function toData(xProp, yProp) {
-      return R.map(function(obj) {
-        return {
-          x: obj[xProp],
-          y: obj[yProp]
-        };
-      });
+    function log(obj) {
+      console.log(obj);
+      return obj;
     }
-
   });
