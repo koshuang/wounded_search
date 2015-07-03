@@ -5,24 +5,6 @@
   </md-content>
 </div>
 <div ng-if="vm.loaded == true">
-  <md-content layout="row" layout-sm="column">
-    <md-card flex class="card-default">
-      <md-card-content layout="column">
-        <div>
-          社會局社工科電話 <a href="tel:02-27206528">02-27206528</a><br><br>
-          <a target="_blank" href="https://tw.news.yahoo.com/%E5%B9%AB%E5%8A%A9%E5%85%AB%E4%BB%99%E5%82%B7%E8%80%85-%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%81%9A%E5%BE%97%E6%9B%B4%E5%A4%9A-034650399.html">幫助八仙傷者 你可以做得更多</a><br><br>
-          <a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json">全國重度級急救責任醫院急診即時訊息</a>
-        </div>
-        <div>
-          <small>資料來源：<a ng-href="{{vm.source.url}}" target="_blank">{{vm.source.name}}</a></small>
-        </div>
-        <div>
-          <small>最後更新時間：{{vm.lastmodify}}</small>
-        </div>
-      </md-card-content>
-    </md-card>
-  </md-content>
-
   <md-content flex class="md-padding">
     <md-input-container md-no-float="">
       <input ng-model="vm.searchText" placeholder="輸入搜尋條件, 例如： 長庚 或是 林文君" ng-change="vm.search()" maxlength="5">

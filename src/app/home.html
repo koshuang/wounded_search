@@ -17,6 +17,7 @@
             {{section}}
           </h2>
           <menu-link ng-if="section.type === 'link'" section="section"></menu-link>
+          <menu-content ng-if="section.type === 'content'" section="section"></menu-content>
           <menu-toggle ng-if="section.type === 'toggle'" section="section"></menu-toggle>
         </li>
       </ul>
