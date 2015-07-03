@@ -1,12 +1,11 @@
 angular.module('app')
-  .controller('StatusController', function(UserService) {
+  .controller('StatusController', function(UserService, $timeout) {
     var vm = this;
 
     vm.options = {
       chart: {
         type: 'pieChart',
-        height: document.getElementsByTagName('md-card-content')[0].clientWidth -
-          50,
+        height: document.getElementsByTagName('md-card-content')[0].clientWidth,
         x: function(d) {
           return d.key + ' (' + d.value + ')';
         },
@@ -40,6 +39,12 @@ angular.module('app')
         .then(injuryStatistic)
         .then(formalInjuryStatistic)
         .then(statusStatistic);
+
+      $timeout(function() {
+        // 一開始的寬度太小
+        vm.options.chart.height = document.getElementsByTagName(
+          'md-card-content')[0].clientWidth;
+      }, 300);
     }
 
     function setUsers(response) {
