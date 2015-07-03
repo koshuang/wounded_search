@@ -1,6 +1,6 @@
 angular.module('app')
   .controller('SearchController', function($mdDialog, $analytics, $timeout,
-    UserService) {
+    data) {
     var vm = this;
     var PAGE_COUNT = 20;
     var paging = {
@@ -24,25 +24,21 @@ angular.module('app')
     }
 
     function fetchUsers() {
-      UserService.getUsers().then(function(response) {
-        var data = response.data;
-        var hospital;
+      var hospital;
 
-        vm.users = data.data;
-        vm.allResult = vm.users;
-        vm.lastmodify = data.lastmodify;
-        vm.result = processPaging(vm.users);
-        vm.source = getSource(data);
+      vm.users = data.data;
+      vm.allResult = vm.users;
+      vm.result = processPaging(vm.users);
+      vm.source = getSource(data);
 
-        processUsers(vm.users);
+      processUsers(vm.users);
 
-        vm.loaded = true;
+      vm.loaded = true;
 
-        fuse = new Fuse(vm.users, {
-          keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
-            '醫療檢傷', '救護檢傷', '即時動向', '轉診要求'
-          ]
-        });
+      fuse = new Fuse(vm.users, {
+        keys: ['編號', '縣市別', '收治單位', '檢傷編號', '姓名', '性別', '國籍', '年齡',
+          '醫療檢傷', '救護檢傷', '即時動向', '轉診要求'
+        ]
       });
     }
 
