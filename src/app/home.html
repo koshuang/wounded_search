@@ -1,0 +1,32 @@
+<div md-swipe-left="vm.onSwipeLeft()" md-swipe-right="vm.onSwipeRight()" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button aria-label="Menu" class="md-icon-button" hide-gt-sm>
+        <md-icon md-svg-icon="src/images/menu.svg"></md-icon>
+      </md-button>
+      <h2>
+        <span>八仙氣爆案傷者查詢</span>
+      </h2>
+    </div>
+  </md-toolbar>
+  <md-content layout="row">
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z1" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+      <ul class="side-menu">
+        <li class="parent-list-item" ng-class="{'parentActive' : vm.isSectionSelected(section)}" ng-repeat="section in vm.menu.sections">
+          <h2 class="menu-heading" id="heading_{{ section.name | nospace}}" ng-if="section.type === 'heading'">
+            {{section}}
+          </h2>
+          <menu-link ng-if="section.type === 'link'" section="section"></menu-link>
+          <menu-toggle ng-if="section.type === 'toggle'" section="section"></menu-toggle>
+        </li>
+      </ul>
+    </md-sidenav>
+    <md-content>
+      <md-tabs md-border-bottom md-dynamic-height md-selected="vm.selectedTab">
+        <md-tab label="傷者查詢" ui-sref="home.search"></md-tab>
+        <md-tab label="狀況統計" ui-sref="home.status"></md-tab>
+      </md-tab>
+    </md-tabs>
+    <div ui-view></div>
+  </md-content>
+</div>

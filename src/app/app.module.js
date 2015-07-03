@@ -1,18 +1,37 @@
-angular.module('app', ['ngMaterial', 'infinite-scroll', 'ui.router',
+angular.module('app', ['ngMaterial', 'ngAria', 'infinite-scroll', 'ui.router',
   'angulartics', 'angulartics.google.analytics', 'nvd3'
 ]);
 
 angular.module('app')
-  .controller('HomeController', function($rootScope, $state, UserService) {
-
+  .controller('HomeController', function($rootScope, $state, UserService, menu) {
+    var vm = this;
     var indexes = {
       'home.search': 0,
       'home.status': 1
     };
 
-    $rootScope.vm.selectedTab = indexes[$state.current.name];
-    $rootScope.vm.onSwipeLeft = onSwipeLeft;
-    $rootScope.vm.onSwipeRight = onSwipeRight;
+    vm.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
+
+    vm.selectedTab = indexes[$state.current.name];
+    vm.onSwipeLeft = onSwipeLeft;
+    vm.onSwipeRight = onSwipeRight;
+
+    vm.isOpen = isOpen;
+    vm.toggleOpen = toggleOpen;
+    vm.autoFocusContent = false;
+    vm.menu = menu;
+
+
+    function isOpen(section) {
+      return menu.isSectionSelected(section);
+    }
+
+    function toggleOpen(section) {
+      menu.toggleSelectSection(section);
+    }
 
     function onSwipeLeft() {
       $rootScope.vm.selectedTab = --$rootScope.vm.selectedTab % 2;
@@ -31,6 +50,40 @@ angular.module('app')
       }
     }
   })
+  .directive('menuToggle', ['$timeout', function($timeout) {
+    return {
+      scope: {
+        section: '='
+      },
+      templateUrl: 'src/app/menu-toggle.html',
+      link: function($scope, $element) {
+        var controller = $element.parent().controller();
+        $scope.isOpen = function() {
+          return controller.isOpen($scope.section);
+        };
+        $scope.toggle = function() {
+          controller.toggleOpen($scope.section);
+        };
+      }
+    };
+  }])
+  .directive('menuLink', function() {
+    return {
+      scope: {
+        section: '='
+      },
+      templateUrl: 'src/app/menu-link.html',
+      link: function($scope, $element) {
+        var controller = $element.parent().controller();
+
+        $scope.focusSection = function() {
+          // set flag to be used later when
+          // $locationChangeSuccess calls openPage()
+          controller.autoFocusContent = true;
+        };
+      }
+    };
+  })
   .factory('UserService', function($http) {
     var cache;
     return {
@@ -44,6 +97,75 @@ angular.module('app')
       });
     }
   })
+  //take all whitespace out of string
+  .filter('nospace', function() {
+    return function(value) {
+      return (!value) ? '' : value.replace(/ /g, '');
+    };
+  })
+  //replace uppercase to regular case
+  .filter('humanizeDoc', function() {
+    return function(doc) {
+      if (!doc) return;
+      if (doc.type === 'directive') {
+        return doc.name.replace(/([A-Z])/g, function($1) {
+          return '-' + $1.toLowerCase();
+        });
+      }
+
+      return doc.label || doc.name;
+    };
+  })
+  .factory('menu', [
+    '$location',
+    '$rootScope',
+    function($location) {
+
+      var sections = [];
+
+      sections.push({
+        name: '最新消息',
+        type: 'toggle',
+        pages: [{
+          name: 'IPAs',
+          type: 'toggle',
+          icon: '',
+          pages: [{
+            name: 'IPAs',
+            type: 'toggle',
+            state: '',
+            icon: ''
+          }]
+        }]
+      });
+
+      var self;
+
+      return self = {
+        sections: sections,
+
+        toggleSelectSection: function(section) {
+          self.openedSection = (self.openedSection === section ? null :
+            section);
+        },
+        isSectionSelected: function(section) {
+          return self.openedSection === section;
+        },
+
+        selectPage: function(section, page) {
+          page && page.url && $location.path(page.url);
+          self.currentSection = section;
+          self.currentPage = page;
+        }
+      };
+
+      function sortByHumanName(a, b) {
+        return (a.humanName < b.humanName) ? -1 :
+          (a.humanName > b.humanName) ? 1 : 0;
+      }
+
+    }
+  ])
   .config(function($urlRouterProvider, $stateProvider, $mdThemingProvider) {
     $urlRouterProvider
       .otherwise('/');
@@ -52,7 +174,7 @@ angular.module('app')
     $stateProvider
       .state('home', {
         url: '/',
-        template: '<div ui-view></div>',
+        templateUrl: 'src/app/home.html',
         controller: 'HomeController',
         controllerAs: 'vm'
       })
