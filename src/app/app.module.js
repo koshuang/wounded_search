@@ -26,7 +26,14 @@ angular.module('app')
     vm.toggleMenu = buildToggleMenu('left');
     vm.autoFocusContent = false;
     vm.menu = menu;
+    vm.share = share;
 
+    function share() {
+      window.open(
+        'http://www.facebook.com/share.php?u=http://koshuang.github.io/wounded_search',
+        '_blank');
+      $analytics.eventTrack('share');
+    }
 
     function isOpen(section) {
       return menu.isSectionSelected(section);

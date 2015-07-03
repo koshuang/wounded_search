@@ -1,8 +1,11 @@
 <div md-swipe-left="vm.onSwipeLeft()" md-swipe-right="vm.onSwipeRight()" ng-cloak>
   <md-toolbar>
-    <div class="md-toolbar-tools">
+    <div class="md-toolbar-tools nav">
       <md-button aria-label="Menu" class="md-icon-button" hide-gt-sm ng-click="vm.toggleMenu()">
         <md-icon md-svg-icon="src/images/menu.svg"></md-icon>
+      </md-button>
+      <md-button aria-label="Menu" class="md-icon-button nav__btn -right">
+        <md-icon md-svg-icon="src/images/facebook.svg" ng-click="vm.share()"></md-icon>
       </md-button>
       <h2>
         <span>八仙氣爆案傷者查詢</span>
