@@ -3,8 +3,8 @@ angular.module('app', ['ngMaterial', 'ngAria', 'infinite-scroll', 'ui.router',
 ]);
 
 angular.module('app')
-  .controller('HomeController', function($rootScope, $state, UserService, data,
-    menuService) {
+  .controller('HomeController', function($rootScope, $state, $mdUtil,
+    $mdSidenav, UserService, data, menuService, $analytics) {
     var vm = this;
     var indexes = {
       'home.search': 0,
@@ -23,6 +23,7 @@ angular.module('app')
 
     vm.isOpen = isOpen;
     vm.toggleOpen = toggleOpen;
+    vm.toggleMenu = buildToggleMenu('left');
     vm.autoFocusContent = false;
     vm.menu = menu;
 
@@ -43,6 +44,16 @@ angular.module('app')
     function onSwipeRight() {
       $rootScope.vm.selectedTab = ++$rootScope.vm.selectedTab % 2;
       go($rootScope.vm.selectedTab);
+    }
+
+    function buildToggleMenu(navID) {
+      var debounceFn = $mdUtil.debounce(function() {
+        $analytics.eventTrack('toggleMenu');
+
+        $mdSidenav(navID)
+          .toggle();
+      }, 300);
+      return debounceFn;
     }
 
     function go(index) {
