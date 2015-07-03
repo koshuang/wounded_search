@@ -6,7 +6,7 @@
       </md-button>
       <md-button aria-label="Menu" class="md-icon-button nav__btn -right">
         <md-tooltip class="tooltipdemoBasicUsage left">
-          分享到fb 天佑台灣
+          分享fb 天佑台灣
         </md-tooltip>
         <md-icon md-svg-icon="src/images/facebook.svg" ng-click="vm.share()"></md-icon>
       </md-button>
@@ -37,3 +37,10 @@
     <div ui-view></div>
   </md-content>
 </div>
+
+<footer class="footer" layout="row">
+  <div>
+    <img src="src/images/hope_taiwan.png" style="margin:10px;" width='50' ng-click="vm.share()">
+  </div>
+  <h4 style="color:#187f93;font-weight:400;">分享fb 天佑台灣</h4>
+</footer>
