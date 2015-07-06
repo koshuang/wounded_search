@@ -80,6 +80,10 @@ a:hover {
   text-align: right;
 }
 
+.home {
+  margin-bottom: 67px !important;
+}
+
 .nav{
   background:#58b4c6;
   padding-right:10px;
