@@ -5,7 +5,6 @@ angular.module('app')
     vm.options = {
       chart: {
         type: 'pieChart',
-        height: document.getElementsByTagName('md-card-content')[0].clientWidth,
         x: function(d) {
           return d.key + ' (' + d.value + ')';
         },
@@ -42,9 +41,9 @@ angular.module('app')
 
       $timeout(function() {
         // 一開始的寬度太小
-        vm.options.chart.height = document.getElementsByTagName(
+        vm.options.chart.height = vm.options.chart.height || document.getElementsByTagName(
           'md-card-content')[0].clientWidth;
-      }, 300);
+      }, 500);
     }
 
     function setUsers(response) {
