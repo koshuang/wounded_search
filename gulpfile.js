@@ -28,7 +28,9 @@ gulp.task('inject', function() {
     read: false
   });
 
-  return target.pipe(inject(sources))
+  return target.pipe(inject(sources, {
+      relative: true
+    }))
     .pipe(gulp.dest('./'));
 });
 
