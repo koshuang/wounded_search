@@ -30,7 +30,7 @@ Responsive Web Design with Material Design
 
   * gulp
     * browser-sync
-    * gulp-inject
+    * gulp-inject: 一加入任何檔案，gulp 會自動把該檔案路徑加到 index.html，方便開發
   * Angular JS
     * ng-infinite-scrolling: 為了增進 Performance，Delay Render 的時機點，在讀取 API 資料後，先 Render 前 40 筆資料，之後再依據 Scroll 做即時 Render
     * angular-material: Material Design
