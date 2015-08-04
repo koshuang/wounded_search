@@ -29,7 +29,8 @@ Responsive Web Design with Material Design
 ## 使用技術
 
   * gulp
-    * gulp-webserver
+    * browser-sync
+    * gulp-inject
   * Angular JS
     * ng-infinite-scrolling: 為了增進 Performance，Delay Render 的時機點，在讀取 API 資料後，先 Render 前 40 筆資料，之後再依據 Scroll 做即時 Render
     * angular-material: Material Design
