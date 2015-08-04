@@ -4,7 +4,7 @@ angular.module('app')
       scope: {
         section: '='
       },
-      templateUrl: 'src/app/menu-toggle.html',
+      templateUrl: 'src/app/core/menu-toggle.html',
       link: function($scope, $element) {
         var controller = $element.parent().controller();
         $scope.isOpen = function() {
@@ -21,7 +21,7 @@ angular.module('app')
       scope: {
         section: '='
       },
-      templateUrl: 'src/app/menu-link.html',
+      templateUrl: 'src/app/core/menu-link.html',
       link: function($scope, $element) {
         var controller = $element.parent().controller();
 
@@ -38,7 +38,7 @@ angular.module('app')
       scope: {
         section: '='
       },
-      templateUrl: 'src/app/menu-content.html',
+      templateUrl: 'src/app/core/menu-content.html',
       link: function($scope, $element) {
         var controller = $element.parent().controller();
 
