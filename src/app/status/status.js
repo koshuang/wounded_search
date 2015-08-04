@@ -49,12 +49,14 @@ angular.module('app')
     function setUsers(response) {
       var data = response.data;
       vm.users = data.data;
+
+      return vm.users;
     }
 
-    function hospitalStatistic() {
+    function hospitalStatistic(users) {
       var getHospitals = R.compose(R.values, createChartData,
         groupByHospitalName('收治單位'));
-      var hospitalUsers = getHospitals(vm.users);
+      var hospitalUsers = getHospitals(users);
 
       vm.hospitals = R.map(function(hospital) {
         return {
@@ -64,13 +66,15 @@ angular.module('app')
       }, hospitalUsers);
 
       vm.hospitals = R.sortBy(R.prop('value'), vm.hospitals);
+
+      return users;
     }
 
-    function injuryStatistic() {
+    function injuryStatistic(users) {
       var doit = R.compose(R.values, createChartData, groupByHospitalName(
         '救護檢傷'));
 
-      vm.injuries = doit(vm.users);
+      vm.injuries = doit(users);
 
       vm.injuries = R.map(function(hospital) {
         return {
@@ -78,13 +82,15 @@ angular.module('app')
           value: hospital.users.length
         };
       }, vm.injuries);
+
+      return users;
     }
 
-    function formalInjuryStatistic() {
+    function formalInjuryStatistic(users) {
       var doit = R.compose(R.values, createChartData, groupByHospitalName(
         '醫療檢傷'));
 
-      vm.formalInjuries = doit(vm.users);
+      vm.formalInjuries = doit(users);
 
       vm.formalInjuries = R.map(function(hospital) {
         return {
@@ -92,9 +98,11 @@ angular.module('app')
           value: hospital.users.length
         };
       }, vm.formalInjuries);
+
+      return users;
     }
 
-    function statusStatistic() {
+    function statusStatistic(users) {
       var groupByHospitalName = R.groupBy(function(user) {
         var status = user['即時動向'];
 
@@ -107,7 +115,7 @@ angular.module('app')
 
       var doit = R.compose(R.values, createChartData, groupByHospitalName);
 
-      vm.allStatus = doit(vm.users);
+      vm.allStatus = doit(users);
 
       vm.allStatus = R.map(function(hospital) {
         return {
@@ -115,6 +123,8 @@ angular.module('app')
           value: hospital.users.length
         };
       }, vm.allStatus);
+
+      return users;
     }
 
     function log(obj) {
