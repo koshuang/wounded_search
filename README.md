@@ -3,6 +3,7 @@
 http://koshuang.github.io/wounded_search/
 
 Event history: https://www.facebook.com/groups/javascript.tw/permalink/647706865330655/
+News: http://www.gov.taipei/mp.asp?mp=2015FFC
 
 Responsive Web Design with Material Design
 
