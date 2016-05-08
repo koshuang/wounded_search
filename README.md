@@ -2,6 +2,8 @@
 
 http://koshuang.github.io/wounded_search/
 
+Event history: https://www.facebook.com/groups/javascript.tw/permalink/647706865330655/
+
 Responsive Web Design with Material Design
 
 ## 功能
